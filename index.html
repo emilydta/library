@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="script.js" defer></script>
+    <title>Library</title>
 </head>
 <body>
+    <div class="book-display"></div>
+    <button type="button" id="add-book-button">New Book</button>
+    <form id="new-book-form">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title"><br>
+        <label for="author">Author:</label><br>
+        <input type="text" id="author"><br>
+        <label for="pages">Pages:</label><br>
+        <input type="text" id="pages"><br>
+        <label for="read-status">Read Status:</label><br>
+            <input type="radio" name="read-status" id="read">
+            <label for="read">Read</label><br>
+            <input type="radio" name="read-status" id="not-read">
+            <label for="not-read">Not Read</label><br>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
 
