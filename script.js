@@ -39,16 +39,11 @@ function books() {
         removeBook = document.createElement('button');
         bookInfoDiv.appendChild(removeBook);
         removeBook.setAttribute("type", "button");
-        //removeBook.setAttribute("id", `${myLibrary[i].idNumber}`)
         removeBook.innerText = "Remove"; 
     
-       
-    
-
         const bookId = document.getElementById(`book-entry-${i}`);
         let removeObjectFromLibrary = myLibrary[i].idNumber;
 
-        console.log(i);
         removeBook.addEventListener("click", function() {
             bookId.remove();
             for (i = 0; i < myLibrary.length; i++) {
@@ -58,7 +53,9 @@ function books() {
             }
             
         });
-}}
+    }
+}
+
 
 books();
 
