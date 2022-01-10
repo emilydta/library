@@ -18,8 +18,8 @@ function Book(title, author, pages, readStatus, idNumber) {
     this.idNumber = idNumber;
 }
 
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read yet', `book-entry-0`);
-const book2 = new Book('Blah', 'Bdsf', '222', 'not read yet', 'book-entry-1');
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'Not Read Yet', `book-entry-0`);
+const book2 = new Book('Blah', 'Bdsf', '222', 'Read', 'book-entry-1');
 
 function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
@@ -28,34 +28,50 @@ function addBookToLibrary(newBook) {
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 
-function books() {
-    for (i = 0; i < myLibrary.length; i++) { 
-        bookInfoDiv = document.createElement('div');
-        bookDisplay.appendChild(bookInfoDiv);
-        bookInfoDiv.setAttribute("class", "book-information");
-        bookInfoDiv.setAttribute("id", `book-entry-${i}`);
-        bookInfoDiv.innerText = `${myLibrary[i].title} \n by ${myLibrary[i].author} \n ${myLibrary[i].pages} pages \n ${myLibrary[i].readStatus}`; 
-        
-        removeBook = document.createElement('button');
-        bookInfoDiv.appendChild(removeBook);
-        removeBook.setAttribute("type", "button");
-        removeBook.innerText = "Remove"; 
-    
-        const bookId = document.getElementById(`book-entry-${i}`);
-        let removeObjectFromLibrary = myLibrary[i].idNumber;
-
-        removeBook.addEventListener("click", function() {
-            bookId.remove();
-            for (i = 0; i < myLibrary.length; i++) {
-                if (myLibrary[i].idNumber == removeObjectFromLibrary) {
-                    myLibrary.splice(i, 1);
-                }
-            }
-            
-        });
-    }
+function removeButton() {
+    const removeBookButton = document.createElement('button');
+    removeBookButton.setAttribute("type", "button");
+    removeBookButton.innerText = "Remove"; 
+    return removeBookButton;
 }
 
+function editStatusButton() {
+    const editReadStatus = document.createElement('button');
+    editReadStatus.setAttribute("type", "button");
+    editReadStatus.innerText = "Edit Read Status"; 
+    return editReadStatus;
+}
+
+function books() {
+    for (i = 0; i < myLibrary.length; i++) { 
+        let bookInfoDiv = document.createElement('div');
+        bookInfoDiv.setAttribute("class", "book-information");
+        bookInfoDiv.setAttribute("id", `${myLibrary[i].idNumber}`);
+        bookInfoDiv.innerText = `${myLibrary[i].title} \n by ${myLibrary[i].author} \n ${myLibrary[i].pages} pages \n ${myLibrary[i].readStatus}`;
+        bookDisplay.appendChild(bookInfoDiv);
+
+        const removeBookButton = removeButton();
+        bookInfoDiv.appendChild(removeBookButton);
+        removeBookButton.addEventListener("click", function() {
+            bookInfoDiv.remove();
+            for (i = 0; i < myLibrary.length; i++) {
+                myLibrary.splice(i, 1);
+            }
+        });
+        const editReadStatusButton = editStatusButton();
+        bookInfoDiv.appendChild(editReadStatusButton);  
+    };
+    
+}
+
+
+Book.prototype.toggleRead = function() {       
+    this.readStatus = "Read";
+}
+
+Book.prototype.toggleNotRead = function() {
+    this.readStatus = "Not Read Yet";
+}
 
 books();
 
@@ -89,6 +105,13 @@ function addBookButtonFunction() {
     } else {
         let bookIdNumber = + new Date();
         let customBook = new Book(`${titleInput.value}`, `${authorInput.value}`, `${pagesInput.value}`, `${readStatusInputChecker()}`, `${bookIdNumber}`);
+        const editReadStatusButton = editStatusButton();
+        editReadStatusButton.addEventListener("click", function() {
+            console.log("bruh");
+            if (customBook.readStatus == "Read") {
+                customBook.toggleNotRead();
+            } else customBook.toggleRead();
+        }); 
         addBookToLibrary(customBook);
         removeAllBooks();
         books();
