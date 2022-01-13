@@ -90,6 +90,7 @@ button {
 .remove-button {
     background: red;
     color: white;
+    margin-top: 1em;
 }
 
 .remove-button:hover {
