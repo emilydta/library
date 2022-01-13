@@ -49,6 +49,7 @@ function books() {
         bookInfoDiv.setAttribute("id", `${myLibrary[i].idNumber}`);
         bookInfoDiv.innerText = `${myLibrary[i].title} \n by ${myLibrary[i].author} \n ${myLibrary[i].pages} pages \n ${myLibrary[i].readStatus}`;
         bookDisplay.appendChild(bookInfoDiv);
+        let bookTarget = myLibrary[i]; 
 
         const removeBookButton = removeButton();
         bookInfoDiv.appendChild(removeBookButton);
@@ -59,9 +60,17 @@ function books() {
             }
         });
         const editReadStatusButton = editStatusButton();
-        bookInfoDiv.appendChild(editReadStatusButton);  
+        bookInfoDiv.appendChild(editReadStatusButton);
+        editReadStatusButton.addEventListener("click", function() {
+            if (bookTarget.readStatus == "Read") {
+                bookTarget.readStatus = "Not Read Yet";
+                bookTarget.toggleNotRead();
+            } else bookTarget.toggleRead();
+            bookInfoDiv.innerText = `${bookTarget.title} \n by ${bookTarget.author} \n ${bookTarget.pages} pages \n ${bookTarget.readStatus}`;
+            bookInfoDiv.appendChild(removeBookButton);
+            bookInfoDiv.appendChild(editReadStatusButton);
+        });   
     };
-    
 }
 
 
@@ -99,20 +108,17 @@ function readStatusInputChecker() {
     }
 }
 
+function newBookFunction() {
+    let bookIdNumber = + new Date();
+    let customBook = new Book(`${titleInput.value}`, `${authorInput.value}`, `${pagesInput.value}`, `${readStatusInputChecker()}`, `${bookIdNumber}`);
+    return customBook;
+}
+
 function addBookButtonFunction() {
     if (!titleInput.value || !authorInput.value || !pagesInput.value || !readInput.checked && !notReadInput.checked) {
         return alert ("Please fill out all fields");
     } else {
-        let bookIdNumber = + new Date();
-        let customBook = new Book(`${titleInput.value}`, `${authorInput.value}`, `${pagesInput.value}`, `${readStatusInputChecker()}`, `${bookIdNumber}`);
-        const editReadStatusButton = editStatusButton();
-        editReadStatusButton.addEventListener("click", function() {
-            console.log("bruh");
-            if (customBook.readStatus == "Read") {
-                customBook.toggleNotRead();
-            } else customBook.toggleRead();
-        }); 
-        addBookToLibrary(customBook);
+        addBookToLibrary(newBookFunction());
         removeAllBooks();
         books();
         newBookForm.reset();
