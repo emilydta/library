@@ -61,9 +61,8 @@ function books() {
         bookInfoDiv.appendChild(removeBookButton);
         removeBookButton.addEventListener("click", function() {
             bookInfoDiv.remove();
-            for (i = 0; i < myLibrary.length; i++) {
-                myLibrary.splice(i, 1);
-            }
+            bookIndex = myLibrary.findIndex(book => book.idNumber ===`${bookTarget.idNumber}`);
+            myLibrary.splice(bookIndex, 1);
         });
 
         if (bookTarget.readStatus == "Not Read Yet") {
@@ -90,7 +89,6 @@ function books() {
         });   
     };
 }
-
 
 Book.prototype.toggleRead = function() {       
     this.readStatus = "Read";
