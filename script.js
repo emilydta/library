@@ -107,13 +107,14 @@ function showForm() {
         newBookForm.style.display = "block";
         bookFormElements.classList.add("add-book-open");
         newBookButton.classList.add("add-book-button-open");
-        newBookButton.innerText = "X";  
+        newBookButton.innerText = "X"; 
+        newBookButton.style.background = "none"; 
         document.body.style.flexDirection = "row";
-         
     } else {
         newBookForm.style.display = "none";
         bookFormElements.classList.remove("add-book-open");
         newBookButton.classList.remove("add-book-button-open");
+        newBookButton.style.background = ""; 
         newBookButton.innerText = "Add Book";
         document.body.style.flexDirection = "column";
 
