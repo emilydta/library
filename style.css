@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: sans-serif;
     background: #BFBFBF;
     display: flex;
     flex-direction: column;
@@ -53,6 +53,7 @@ body {
 
 .add-book-open {
     background: #333333;
+    margin-right: 2em;
     padding: 2em;
     color: white;
     height: 100vh;
@@ -60,6 +61,7 @@ body {
 
 .add-book-button-open {
     color: white;
+    border: none;
     background: none;
 }
 
