@@ -9,6 +9,7 @@ This project was completed as part of The Odin Project curriculum: https://www.t
 Completing this project has taught me:
 
   - How to use objects in my projects.
+  - How to use an object constructor.
   - How prototype inheritance works in JavaScript.
   
 
