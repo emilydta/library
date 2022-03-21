@@ -11,12 +11,22 @@ const bookFormElements = document.querySelector(".book-form-elements");
 
 let myLibrary = [];
 
-function Book(title, author, pages, readStatus, idNumber) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-    this.idNumber = idNumber;
+class Book {
+    constructor(title, author, pages, readStatus, idNumber) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+        this.idNumber = idNumber;
+    }
+
+    toggleRead() {       
+        this.readStatus = "Read";
+    }
+    
+    toggleNotRead() {
+        this.readStatus = "Not Read Yet";
+    }
 }
 
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'Read', `book-entry-0`);
@@ -90,13 +100,7 @@ function books() {
     };
 }
 
-Book.prototype.toggleRead = function() {       
-    this.readStatus = "Read";
-}
 
-Book.prototype.toggleNotRead = function() {
-    this.readStatus = "Not Read Yet";
-}
 
 books();
 
